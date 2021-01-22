@@ -7,16 +7,19 @@ class ResultsView extends View {
   _message = '';
 
   _generalMarkup() {
+    const id = window.location.hash.slice(1);
     return this._data
       .map(item => {
-        return this._generalMarkupPreview(item);
+        return this._generalMarkupPreview(item, id);
       })
       .join('');
   }
-  _generalMarkupPreview(item) {
+  _generalMarkupPreview(item, id) {
     return `
       <li class="preview">
-      <a class="preview__link " href="#${item.id}">
+      <a class="preview__link ${
+        item.id === id ? 'preview__link--active' : ''
+      } " href="#${item.id}">
         <figure class="preview__fig">
           <img src=${item.image} alt=${item.title} />
         </figure>
